@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="/">
+<html>
+<head>
+    <title>Applicazione WEB</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript">
+	function cambiaCheckbox(elemento) {
+	    if($(elemento).attr('id') == "italiano") {
+                $('#div_inglese').hide();
+                $('#div_italiano').show();
+        }
+        else if($(elemento).attr('id') == "inglese") {
+                $('#div_italiano').hide();
+                $('#div_inglese').show();
+        }
+    }
+    </script>
+
+    
+  
+<!--    <script type="text/javascript">
+        function soloNumeri(vnt)
+{ var tasto, carattereTasto;
+if (window.vnt) //Modello ad eventi IE
+tasto = window.vnt.keyCode;
+else if (vnt) //Modello ad eventi NN
+tasto = vnt.which;
+else return true;
+//converte Da CharCode (Unicode) a Char
+carattereTasto = String.fromCharCode(tasto);
+if ((tasto==null) || (tasto==0) || (tasto==8) ||
+(tasto==9) || (tasto==13) || (tasto==27) )
+return true;
+else if ((("0123456789").indexOf(carattereTasto) > -1))
+{
+window.status = ""; return true;
+}
+else
+{
+window.status = "Il campo accetta solo numeri";
+return false; }
+}
+
+(function($) {
+    $.fn.oneChecked = function() {
+        alert("here")
+        var $ckboxes = this,
+            names = [],
+            num = 0;
+        $ckboxes.each(function() {
+            var name = this.name;
+            alert(" " + name);
+            if (!$.inArray(name, names)) {
+                names.push(name);
+            }
+        });
+        for (var i = 0, l = names.length; i < l; i++) {
+            if ($ckboxes.filter('[name="' + names[i] + '"]:checked').length) {
+                num++
+            }
+        }
+        alert(" " + num);
+        alert(" " + names.length);
+        if (num === names.length) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+})(jQuery);
+
+function controlla()
+{
+    alert("qua");
+    if (!$(':checkbox').oneChecked()) {
+	alert("quisggfgfdgfgfddfgfdg");
+	// errore
+	
+} else {
+	
+	
+	// va bene
+}
+}
+    </script>
+    -->
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>LPR Application</h1>
+        <!-- <p><a class="btn btn-primary btn-lg" href="#autori" role="button">Learn more about the authors</a></p> -->
+    </div>
+    <section style="position:relative">
+	<div style="width: 800px;height: 400px;position:relative;top:0;left:20%;display:inline-block;">
+	    <form role="form" action="generateOutput.php" method="post">
+		<div class="form-group">
+		    <label for="parola"><h3>Parola/Word:</h3></label>
+		    <input type="text" class="form-control" id="parola" name="parola" placeholder="Inserisci la parola/Insert the word..." onclick="soloNumeri(this)" required="true"/>
+		</div>
+		<br/>
+		<div style="margin-left: 330px">
+		    <label class="radio-inline">
+			<input type="radio" name="lingua" id="italiano" value="italiano" required="true" checked="true" onclick="cambiaCheckbox(this);"/>Italiano
+	            </label>
+	            <label class="radio-inline">
+	                <input type="radio" name="lingua" id="inglese" value="inglese" onclick="cambiaCheckbox(this);"/>Inglese
+	            </label>
+	        </div>
+		<br />
+		<div id="div_italiano" style="text-align:center;">
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="sinonimi" value="sinonimi" name="checkbox[]"/> Sinonimi
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="contrari" value="contrari" name="checkbox[]"/> Contrari
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="rime" value="rime" name="checkbox[]"/> Rime
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="contesti" value="contesti" name="checkbox[]"/> Contesti
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="wikipedia" value="wikipedia" name="checkbox[]"/> Wikipedia
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="dialetti" value="dialetti" name="checkbox[]"/> Dialetti
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="taduzioni" value="traduzioni" name="checkbox[]"/> Traduzione
+		    </label>
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="modi" value="modi" name="checkbox[]"/> Modi di dire
+		    </label>
+		</div>
+		<div id="div_inglese" style="display: none; text-align:center;">
+		    <label class="checkbox-inline">
+			<input type="checkbox" id="wikipedia" value="wikipedia" name="checkbox[]"/> Wikipedia
+		    </label>
+		    <label class="checkbox-inline">
+		    	<input type="checkbox" id="taduzioni" value="traduzioni" name="checkbox[]"/> Traduzione
+		    </label>
+		    <label class="checkbox-inline">
+		        <input type="checkbox" id="overviews" value="overviews" name="checkbox[]"/> Overviews
+		    </label>
+		    <label class="checkbox-inline">
+		        <input type="checkbox" id="synonyms" value="synonyms" name="checkbox[]"/> Synonyms
+		    </label>
+		</div>
+		<br />
+		<button type="submit" class="btn btn-primary" id="invia" name="invia" style="display: block;margin: auto">Invia</button>
+	    </form>
+	</div>
+    </section>
+    <footer>  
+        <div id="div_footer" style="position:fixed;z-index:20">
+            <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+                <div class="col-md-4"></div>
+                <div class="col-md-6" id="div_footer_1">
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav nav-pills">
+                                <li>Amedeo Leo<a href="#" style="display: inline-block"><img src="linkedin.png" /></a></li>
+                                <li>Alessio Petrozziello<a href="#" style="display: inline-block"><img src="linkedin.png" /></a></li>
+                                <li>Simone Romano<a href="#" style="display: inline-block"><img src="linkedin.png" /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
+</xsl:stylesheet>
